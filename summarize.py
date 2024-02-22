@@ -1,5 +1,10 @@
 import google.generativeai as palm
-palm.configure(api_key="AIzaSyAPy5X6x-wVgkQRVNgErySk9MGP0MdPpoQ")
+
+api_key_filepath = r".\Api.txt"
+with open(api_key_filepath, 'r', encoding='utf-8') as file:
+    api_key = file.read()
+print(api_key)
+palm.configure(api_key=api_key)
 
 defaults = {
   'model': 'models/text-bison-001',
