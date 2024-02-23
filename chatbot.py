@@ -1,11 +1,13 @@
 import google.generativeai as genai
 
-api_key_filepath = r".\Api.txt"
-with open(api_key_filepath, 'r', encoding='utf-8') as file:
-    api_key = file.read()
-print(api_key)
+# api_key_filepath = r".\Api.txt"
+# with open(api_key_filepath, 'r', encoding='utf-8') as file:
+#     api_key = "AIzaSyAPy5X6x-wVgkQRVNgErySk9MGP0MdPpoQ"
+# print(api_key)
 
-genai.configure(api_key=api_key,transport='rest')
+
+
+genai.configure(api_key="AIzaSyAPy5X6x-wVgkQRVNgErySk9MGP0MdPpoQ",transport='rest')
 
 generation_config = {
   "temperature": 0.9,
