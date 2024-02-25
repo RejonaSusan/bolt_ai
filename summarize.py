@@ -1,10 +1,10 @@
 import google.generativeai as palm
 
-api_key_filepath = r".\Api.txt"
-with open(api_key_filepath, 'r', encoding='utf-8') as file:
-    api_key = file.read()
-print(api_key)
-palm.configure(api_key=api_key)
+# api_key_filepath = "Api.txt"
+# with open(api_key_filepath, 'r', encoding='utf-8') as file:
+#     api_key = file.read()
+# print(api_key)
+palm.configure(api_key="AIzaSyAPy5X6x-wVgkQRVNgErySk9MGP0MdPpoQ")
 
 defaults = {
   'model': 'models/text-bison-001',
@@ -16,7 +16,7 @@ defaults = {
   'stop_sequences': [],
 }
 
-filepath = ".\demo.txt"
+filepath = "./demo.txt"
 with open(filepath, 'r', encoding='utf-8') as file:
     file_contents = file.read()
 
@@ -25,6 +25,7 @@ print("Summary:\n")
 # prompt = input("User: ")
 response = palm.generate_text(
   **defaults,
-  prompt=prompt
+  prompt=prompt,
 )
 print("Chatbot:", response.result)
+print(type(response.result))
