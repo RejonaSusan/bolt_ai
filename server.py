@@ -9,9 +9,8 @@ async def hello_world():
     return {"message": "Hello, World!"}
 
 @app.post("/video/summary")
-async def video_summary():
+async def video_summary(link):
     try:
-        link = "https://www.youtube.com/embed/6OQAHcB72dg"
         video_id = link[30:41]
         transcript = getTranscript(video_id)
         print(transcript)
