@@ -1,24 +1,25 @@
-from flask import Flask
+from fastapi import FastAPI
 from transcript import getTranscript
 from summarize import summariseTranscript
 
-app = Flask(__name__)
+app = FastAPI()
 
 @app.get("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
+async def hello_world():
+    return {"message": "Hello, World!"}
 
 @app.post("/video/summary")
-def videoSummary():
+async def video_summary():
     try:
         link = "https://www.youtube.com/embed/6OQAHcB72dg"
         video_id = link[30:41]
-        transcript =  getTranscript(video_id)
+        transcript = getTranscript(video_id)
         print(transcript)
-        s = summariseTranscript(transcript)
-        return s
+        summary = summariseTranscript(transcript)
+        return {"summary": summary}
     except Exception as e:
-        return f"Error: {str(e)}"
-    
+        return {"error": str(e)}
+
 if __name__ == '__main__':
-    app.run(debug=True, port=8001)
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8001, debug=True)
