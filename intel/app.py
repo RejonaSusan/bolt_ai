@@ -59,6 +59,7 @@ def summaryBot(link : str):
     finalop = ''
     for i in op:
         finalop = i
+    print(finalop[0:-4])
     return [transcript, finalop[0:-4]]
 
 def chatBot(prompt, history):
@@ -67,9 +68,3 @@ def chatBot(prompt, history):
         finalop = i
     return finalop[0:-4]
    
-
-op = generate("What's yellow", [("What's the colour of a banana", "Yellow")])
-finalop = ''
-for i in op:
-    finalop = i
-print(finalop[0:-4])

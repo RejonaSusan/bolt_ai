@@ -19,9 +19,9 @@ async def hello_world():
     return {"message": "Hello, World!"}
 
 @app.post("/video/summary")
-async def video_summary(urlink : str):
+async def video_summary(data : dict):
     try:
-        l = summaryBot(urlink)
+        l = summaryBot(data.get('url'))
         transcript = l[0]
         summary = l[1]
         return {"summary": summary, "transcript" : transcript}
