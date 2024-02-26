@@ -59,7 +59,7 @@ def summaryBot(link : str):
     finalop = ''
     for i in op:
         finalop = i
-    return finalop[0:-4]
+    return [transcript, finalop[0:-4]]
 
 def chatBot(prompt, history):
     op = generate(prompt, history)

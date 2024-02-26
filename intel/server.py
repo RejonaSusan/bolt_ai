@@ -21,8 +21,10 @@ async def hello_world():
 @app.post("/video/summary")
 async def video_summary(urlink : str):
     try:
-        summary = summaryBot(urlink)
-        return {"summary": summary}
+        l = summaryBot(urlink)
+        transcript = l[0]
+        summary = l[1]
+        return {"summary": summary, "transcript" : transcript}
     except Exception as e:
         return {"error": str(e)}
     
