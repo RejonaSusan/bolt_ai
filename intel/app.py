@@ -1,5 +1,6 @@
 from huggingface_hub import InferenceClient
-import gradio as gr
+from transcript import getTranscript
+# import gradio as gr
 
 client = InferenceClient(
     "mistralai/Mistral-7B-Instruct-v0.1"
@@ -41,11 +42,34 @@ def generate(
         yield output
     return output
 
-with gr.Blocks() as demo:
-    gr.HTML("<h1><center>BRAINIAC AI</h1>")
-    gr.HTML("<h3><center>Hey!! How can I help you</center></h3>")
-    gr.ChatInterface(
-        generate
-    )
+# with gr.Blocks() as demo:
+#     gr.HTML("<h1><center>BRAINIAC AI</h1>")
+#     gr.HTML("<h3><center>Hey!! How can I help you</center></h3>")
+#     gr.ChatInterface(
+#         generate
+#     )
 
-demo.queue().launch(debug=True)
+# demo.queue().launch(debug=True)
+
+
+def summaryBot(link : str):
+    video_id = link[30:41]
+    transcript = "mention the subtopics in this transcript in pointers" + getTranscript(video_id)
+    op = generate((transcript),"")
+    finalop = ''
+    for i in op:
+        finalop = i
+    return finalop[0:-4]
+
+def chatBot(prompt, history):
+    op = generate(prompt, history)
+    for i in op:
+        finalop = i
+    return finalop[0:-4]
+   
+
+op = generate("What's yellow", [("What's the colour of a banana", "Yellow")])
+finalop = ''
+for i in op:
+    finalop = i
+print(finalop[0:-4])
